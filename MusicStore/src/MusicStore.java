@@ -1,10 +1,30 @@
+import java.util.Calendar;
+
 public class MusicStore {
-    private int openTime = 9;
-    private int closeTime = 21;
+    private int openTime;
+    private int closeTime;
     private String owner;
 
     public MusicStore() {
         setOwner("Sem dono");
+        setOpenTime(9);
+        setCloseTime(21);
+    }
+
+    public int getOpenTime() {
+        return openTime;
+    }
+
+    public void setOpenTime(int openTime) {
+        this.openTime = openTime;
+    }
+
+    public int getCloseTime() {
+        return closeTime;
+    }
+
+    public void setCloseTime(int closeTime) {
+        this.closeTime = closeTime;
     }
 
     public String getOwner() {
@@ -13,6 +33,26 @@ public class MusicStore {
 
     public void setOwner(String owner) {
         this.owner = owner;
+    }
+
+    private int getHour() {
+        Calendar calendario = Calendar.getInstance(); // classe que tem o metodo de retorno da sua regiao do planeta;
+        return calendario.get(Calendar.HOUR_OF_DAY); // retorna um inteiro com a hora do dia
+    }
+
+    private boolean isOpen() {
+        int hora = getHour();
+        if (hora > 8 && hora < 22) {
+            return true;
+        }
+        return false;
+    }
+
+    public String getOpenCloseMessage() {
+        if (isOpen()) {
+            return "A loja esta aberta";
+        }
+        return "A loja esta fechada";
     }
 
     public void displayHourofOperation() {
