@@ -4,11 +4,29 @@ public class MusicStore {
     private int openTime;
     private int closeTime;
     private String owner;
+    private Title[] titulos = new Title[4];
+
+    public Title[] getTitulos() {
+        return titulos;
+    }
+
+    public void setTitulos(String titulo, String artista, int pos) {
+        if (pos < 0 || pos > 4) {
+            return;
+        }
+        Title tituloTemporario = new Title();
+        tituloTemporario.setArtista(artista);
+        tituloTemporario.setTitulo(titulo);
+
+        titulos[pos] = tituloTemporario;
+
+    }
 
     public MusicStore() {
         setOwner("Sem dono");
         setOpenTime(9);
         setCloseTime(21);
+        // this.titulos = new Title();
     }
 
     public int getOpenTime() {
@@ -53,6 +71,15 @@ public class MusicStore {
             return "A loja esta aberta";
         }
         return "A loja esta fechada";
+    }
+
+    public String displayMusictitles() {
+        System.out.println("titulos disponiveis\n");
+        String retorno = "";
+        for (int i = 0; i < 4; i++) {
+            retorno = retorno + titulos[i].toString();
+        }
+        return retorno;
     }
 
     public void displayHourofOperation() {

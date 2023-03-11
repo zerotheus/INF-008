@@ -3,13 +3,13 @@ public class Title {
     private String artista;
 
     public Title() {
-        setartista("Sem artista");
+        setArtista("Sem artista");
         setTitulo("Sem titulo");
     }
 
     public Title(String artista, String titulo) {
         setTitulo(titulo);
-        setartista(artista);
+        setArtista(artista);
     }
 
     public String getTitulo() {
@@ -20,12 +20,17 @@ public class Title {
         this.titulo = titulo;
     }
 
-    public String getartista() {
+    public String getArtista() {
         return artista;
     }
 
-    public void setartista(String artista) {
+    public void setArtista(String artista) {
         this.artista = artista;
+    }
+
+    @Override
+    public String toString() {
+        return "Titulo: " + titulo + ", Artista: " + artista + ".\n";
     }
 
 }
