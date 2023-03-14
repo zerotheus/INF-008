@@ -5,8 +5,9 @@ public class ContaCorrente extends Conta {
     }
 
     @Override
-    public double atualizacaoMensal() {
-        return super.saldo - 1;
+    public void atualizacaoMensal() {
+        super.saldo = super.saldo - 1;
+        return;
     }
 
 }

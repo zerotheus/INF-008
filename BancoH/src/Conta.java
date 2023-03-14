@@ -3,6 +3,10 @@ public abstract class Conta extends Cliente {
     protected double saldo;
     int num;
 
+    public int getNum() {
+        return num;
+    }
+
     public double getSaldo() {
         return saldo;
     }
@@ -20,6 +24,9 @@ public abstract class Conta extends Cliente {
             System.out.println("nao e possivel sacar valores negativos");
             return;
         }
+        if (this.saldo < saque) {
+            System.out.println("saldo insuficiente");
+        }
         this.saldo -= saque;
     }
 
@@ -29,5 +36,5 @@ public abstract class Conta extends Cliente {
         this.saldo = 0;
     }
 
-    public abstract double atualizacaoMensal();
+    public abstract void atualizacaoMensal();
 }
