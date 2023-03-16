@@ -1,9 +1,11 @@
 public abstract class Pessoa {
     private String nome;
     private String cpf;
+    private int registro;
 
-    Pessoa(String nome){
+    Pessoa(String nome, int registro) {
         this.nome = nome;
+        this.registro = registro;
     }
 
     public String getNome() {
@@ -15,9 +17,10 @@ public abstract class Pessoa {
     }
 
     abstract void empregadosSubordinados();
-    
+
     abstract void listarEmpregados();
-    
+
     abstract void listarChefes();
-         
+
+    abstract void addEmpregado(Empregado empregada);
 }
