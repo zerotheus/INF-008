@@ -23,16 +23,24 @@ public class Empregado extends Pessoa {
         }
     }
 
-    @Override
     void listarChefes() {
-        // TODO Auto-generated method stub
-
+        Pessoa chefe = this.getChefe();
+        while (chefe.getClass() == this.getClass()) {
+            final Empregado chefeEmpregado = (Empregado) chefe;
+            chefeEmpregado.listarChefes();
+            System.out.println(this.getChefeName());
+            return;
+        }
+        if (chefe.getClass() != this.getClass()) {
+            System.out.println(chefe.getNome());
+        }
     }
 
     @Override
-    void listarEmpregados() {
-        // TODO Auto-generated method stub
-
+    void listarEmpregadosDiretos() {
+        for (int i = 0; i < empregados.size(); i++) {
+            System.out.println(empregados.get(i).getNome());
+        }
     }
 
     public Pessoa getChefe() {

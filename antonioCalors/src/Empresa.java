@@ -34,6 +34,8 @@ public class Empresa {
         Empregado m = adicionaEmpregado("manoel", f);
 
         AC.empregadosSubordinados();
+        System.out.println("\n\n\n");
+        s.listarChefes();
 
         // System.out.println(f.getChefe().getNome());
 

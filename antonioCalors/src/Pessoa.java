@@ -18,9 +18,7 @@ public abstract class Pessoa {
 
     abstract void empregadosSubordinados();
 
-    abstract void listarEmpregados();
-
-    abstract void listarChefes();
+    abstract void listarEmpregadosDiretos();
 
     abstract void addEmpregado(Empregado empregada);
 }

@@ -22,15 +22,10 @@ class Chefe extends Pessoa {
     }
 
     @Override
-    void listarChefes() {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    void listarEmpregados() {
-        // TODO Auto-generated method stub
-
+    void listarEmpregadosDiretos() {
+        for (int i = 0; i < empregados.size(); i++) {
+            System.out.println(empregados.get(i).getNome());
+        }
     }
 
     @Override
