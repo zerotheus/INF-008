@@ -12,11 +12,11 @@ class Chefe extends Pessoa {
 
     @Override
     void empregadosSubordinados() {
-        System.out.println("chefe");
+        // System.out.println("chefe");
         for (int i = 0; i < empregados.size(); i++) {
             Pessoa empregado = empregados.get(i);
             empregado.empregadosSubordinados();
-            System.out.println(empregado.getNome());
+            System.out.println(empregado.getNome() + " Chefe: " + super.getNome());
         }
         // System.out.println("exit 0");
     }

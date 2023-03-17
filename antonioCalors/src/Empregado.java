@@ -17,8 +17,9 @@ public class Empregado extends Pessoa {
     void empregadosSubordinados() {
         for (int i = 0; i < empregados.size(); i++) {
             Pessoa empregado = empregados.get(i);
-            System.out.println(empregado.getNome()); // System.out.println("ueee");
             empregado.empregadosSubordinados();
+            Empregado chefe = (Empregado) empregado;
+            System.out.println(empregado.getNome() + " Chefe: " + chefe.getChefeName());
         }
     }
 
@@ -38,6 +39,10 @@ public class Empregado extends Pessoa {
         return this.chefe;
     }
 
+    public String getChefeName() {
+        return this.chefe.getNome();
+    }
+
     public List<Empregado> getEmpregados() {
         return empregados;
     }
@@ -49,8 +54,6 @@ public class Empregado extends Pessoa {
     @Override
     void addEmpregado(Empregado empregada) {
         empregados.add(empregada);
-        // TODO Auto-generated method stub
-
     }
 
 }
