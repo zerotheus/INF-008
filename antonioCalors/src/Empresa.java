@@ -28,7 +28,10 @@ public class Empresa {
         Pessoa AC = AntonioCarlos();
         Empregado r = adicionaEmpregado("Romilson", AC);
         Empregado f = adicionaEmpregado("Flavia", r);
-        Empregado g = adicionaEmpregado("Renato", f);
+        Empregado n = adicionaEmpregado("Renato", f);
+        Empregado g = adicionaEmpregado("Grindaldo", f);
+        Empregado s = adicionaEmpregado("simone", g);
+        Empregado m = adicionaEmpregado("manoel", f);
 
         AC.empregadosSubordinados();
 
