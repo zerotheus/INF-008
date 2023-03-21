@@ -2,7 +2,6 @@ public class Professor extends Pesquisador {
 
     public Professor(String nome, Pesquisador orientador) {
         super(nome, orientador);
-        // TODO Auto-generated constructor stub
     }
 
     @Override
@@ -13,7 +12,12 @@ public class Professor extends Pesquisador {
 
     @Override
     public void listaPesquisadores() throws Exception {
-        throw new UnsupportedOperationException("Unimplemented method 'listaPesquisadores'");
+        throw new UnsupportedOperationException("Esta pessoa nao tem pesquisadores");
+    }
+
+    @Override
+    public void adicionaPesquisador(Pesquisador pesquisador) throws Exception {
+        throw new UnsupportedOperationException("Esta pessoa nao pode adicionar pesquisadores");
     }
 
 }

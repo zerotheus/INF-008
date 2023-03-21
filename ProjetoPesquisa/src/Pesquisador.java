@@ -23,8 +23,17 @@ public abstract class Pesquisador {
         this.orientador = orientador;
     }
 
+    public void getOrientadoresSuperiores(){
+        if(this.orientador != null){
+        System.out.println(this.orientador.getNome());
+            this.orientador.getOrientadoresSuperiores();
+        }
+    }
+
     public abstract double getPagameto();
 
     public abstract void listaPesquisadores() throws Exception;
+
+    public abstract void adicionaPesquisador(Pesquisador pesquisador) throws Exception;
 
 }

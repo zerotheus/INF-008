@@ -19,8 +19,14 @@ public class Orientador extends Pesquisador {
     @Override
     public void listaPesquisadores() throws Exception {
         for (int i = 0; i < pesquisadores.size(); i++) {
-
+            System.out.println(pesquisadores.get(i).nome + " Orientador: " + pesquisadores.get(i).getOrientador().getNome());
+            this.pesquisadores.get(i).listaPesquisadores();//Lista todos os pesquisadores subordinados
         }
+    }
+
+    @Override
+    public void adicionaPesquisador(Pesquisador pesquisador) throws Exception {
+        this.pesquisadores.add(pesquisador);
     }
 
 }
