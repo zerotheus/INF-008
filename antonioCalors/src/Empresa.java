@@ -3,48 +3,41 @@ import java.util.List;
 
 public class Empresa {
     private List<Pessoa> empregados = new ArrayList<Pessoa>();
-    private int geraRegistro;
 
-    public Empregado adicionaEmpregado(String nome, Pessoa chefe) {
-        geraRegistro++;
-        Empregado novoEmpregado = new Empregado(nome, chefe, geraRegistro);
-        chefe.addEmpregado(novoEmpregado);
-        return novoEmpregado;
-    }
-
-    public void adicionaEmpregados() {
-
-    }
-
-    public Pessoa AntonioCarlos() {
-        Pessoa AC = new Chefe("Antonio Carlos", geraRegistro);
-        empregados.add(AC);
-        geraRegistro++;
-        return AC;
-    }
-
-    public void Empresamain() {
-
-        Pessoa AC = AntonioCarlos();
-        Empregado r = adicionaEmpregado("Romilson", AC);
-        Empregado f = adicionaEmpregado("Flavia", r);
-        Empregado n = adicionaEmpregado("Renato", f);
-        Empregado g = adicionaEmpregado("Grindaldo", f);
-        Empregado s = adicionaEmpregado("simone", g);
-        Empregado m = adicionaEmpregado("manoel", f);
-
-        AC.empregadosSubordinados();
-
-        // System.out.println(f.getChefe().getNome());
-
-    }
-
-    public void listarTodosOsEmpregados() {
-        for (int i = 0; i < empregados.size(); i++) {
-            final Pessoa empregadoaListar = empregados.get(i);
-            System.out.println(empregadoaListar.getNome());
-            System.out.println(empregadoaListar.getClass());
+    public void insereEmpregado(Pessoa empregado, Pessoa chefe) {
+        this.empregados.add(empregado);
+        try {
+            chefe.insereEmpregado(empregado);
+        } catch (Exception e) {
+            e.toString();
         }
+    }
+
+    public void EmpresaMain() {
+
+        Pessoa AC = new Chefe("AC");
+        Pessoa emp = new Empregado("empregado", AC);
+        Pessoa b = new Chefe("Batista", AC);
+        Pessoa c = new Chefe("Carlos", b);
+        Pessoa a = new Chefe("Antonio", AC);
+        Pessoa d = new Empregado("daniel", c);
+        Pessoa f = new Empregado("farcos", b);
+
+        insereEmpregado(emp, AC);
+        insereEmpregado(b, AC);
+        insereEmpregado(c, b);
+        insereEmpregado(a, AC);
+        insereEmpregado(d, c);
+        insereEmpregado(f, b);
+
+        try {
+            AC.listaEmpregados();
+            System.out.println("c chefes");
+            c.listaChefes();
+        } catch (Exception e) {
+            e.toString();
+        }
+
     }
 
 }

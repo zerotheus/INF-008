@@ -1,11 +1,24 @@
 public abstract class Pessoa {
     private String nome;
-    private String cpf;
-    private int registro;
+    private Pessoa chefe;
 
-    Pessoa(String nome, int registro) {
+    Pessoa(String nome) {
         this.nome = nome;
-        this.registro = registro;
+        this.chefe = null;
+    }
+
+    Pessoa(String nome, Pessoa chefe) {
+        this.nome = nome;
+        this.chefe = chefe;
+    }
+
+    public abstract void listaEmpregados() throws Exception;
+
+    public void listaChefes() {
+        if (chefe != null) {
+            System.out.println(this.chefe.getNome());
+            this.getChefe().listaChefes();
+        }
     }
 
     public String getNome() {
@@ -16,11 +29,14 @@ public abstract class Pessoa {
         this.nome = nome;
     }
 
-    abstract void empregadosSubordinados();
+    public Pessoa getChefe() {
+        return chefe;
+    }
 
-    abstract void listarEmpregados();
+    public void setChefe(Pessoa chefe) {
+        this.chefe = chefe;
+    }
 
-    abstract void listarChefes();
+    public abstract void insereEmpregado(Pessoa empregado) throws Exception;
 
-    abstract void addEmpregado(Empregado empregada);
 }

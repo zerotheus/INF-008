@@ -3,38 +3,35 @@ import java.util.List;
 
 class Chefe extends Pessoa {
     List<Pessoa> empregados;
-    // Empregado Chefe;
 
-    Chefe(String nome, int registro) {
-        super(nome, registro);
+    Chefe(String nome) {
+        super(nome, null);
         empregados = new ArrayList<Pessoa>();
     }
 
+    Chefe(String nome, Pessoa chefe) {
+        super(nome, chefe);
+        empregados = new ArrayList<Pessoa>();
+
+    }
+
     @Override
-    void empregadosSubordinados() {
-        // System.out.println("chefe");
+    public void listaEmpregados() throws Exception {
+
         for (int i = 0; i < empregados.size(); i++) {
-            Pessoa empregado = empregados.get(i);
-            empregado.empregadosSubordinados();
-            System.out.println(empregado.getNome() + " Chefe: " + super.getNome());
+            System.out.println(empregados.get(i).getNome());
+            try {
+                empregados.get(i).listaEmpregados();
+            } catch (Exception e) {
+                e.toString();
+            }
         }
-        // System.out.println("exit 0");
-    }
-
-    @Override
-    void listarChefes() {
-        // TODO Auto-generated method stub
 
     }
 
     @Override
-    void listarEmpregados() {
-        // TODO Auto-generated method stub
-
+    public void insereEmpregado(Pessoa empregado) throws Exception {
+        this.empregados.add(empregado);
     }
 
-    @Override
-    void addEmpregado(Empregado empregada) {
-        empregados.add(empregada);
-    }
 }
