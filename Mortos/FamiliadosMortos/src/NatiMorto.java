@@ -14,4 +14,8 @@ public class NatiMorto extends Pessoa {
         throw new UnsupportedOperationException("natimorto nao tem filhos");
     }
 
+    protected void adicionaPrefixo() {
+        this.setNome("Natimorto " + this.getNome());
+    }
+
 }

@@ -32,15 +32,23 @@ public class Filha extends Pessoa {
             if (filha.seraNatimorto()) {
                 filha = new NatiMorto(nome, this, sexo);
             }
+            filha.adicionaPrefixo();
+            this.getFilhos().add(filha);
             return filha;
         } else if (sexo == 'm' || sexo == 'M') {
             Pessoa filho = new Filho(nome, this);
             if (filho.seraNatimorto()) {
                 filho = new NatiMorto(nome, this, sexo);
             }
+            filho.adicionaPrefixo();
+            this.getFilhos().add(filho);
             return filho;
         }
         throw new Exception("Erro de digitação do sexo");
+    }
+
+    protected void adicionaPrefixo() {
+        this.setNome("Sra. " + this.getNome());
     }
 
 }

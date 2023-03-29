@@ -6,7 +6,6 @@ public abstract class Pessoa {
     private static String sobrenome = null;
     private List<Pessoa> filhos;
     private Pessoa antecessor;
-
     private char sexo;
 
     public Pessoa() throws Exception {
@@ -46,13 +45,18 @@ public abstract class Pessoa {
         return sexo;
     }
 
-    public void setSexo(char sexo) {
-        this.sexo = sexo;
-    }
-
     public Pessoa getAntecessor() {
         return antecessor;
     }
+
+    public void listaAntecessores() {
+        if (this.getAntecessor() != null) {
+            System.out.println(this.getAntecessor().getNome());
+            this.getAntecessor().listaAntecessores();
+        }
+    }
+
+    protected abstract void adicionaPrefixo();
 
     protected abstract boolean seraNatimorto() throws Exception;
 

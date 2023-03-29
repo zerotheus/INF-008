@@ -6,7 +6,7 @@ public class Filho extends Pessoa {
         super(nome, antecessor, 'm');
     }
 
-    public Filho(String nome, String sobrenome) throws Exception {
+    public Filho() throws Exception {
         super();
     }
 
@@ -36,15 +36,24 @@ public class Filho extends Pessoa {
             if (filha.seraNatimorto()) {
                 filha = new NatiMorto(nome, this, sexo);
             }
+            filha.adicionaPrefixo();
+            this.getFilhos().add(filha);
             return filha;
         } else if (sexo == 'm' || sexo == 'M') {
             Pessoa filho = new Filho(nome, this);
             if (filho.seraNatimorto()) {
                 filho = new NatiMorto(nome, this, sexo);
             }
+            filho.adicionaPrefixo();
+            this.getFilhos().add(filho);
             return filho;
         }
         throw new Exception("Erro de digitação do sexo");
+    }
+
+    @Override
+    protected void adicionaPrefixo() {
+        this.setNome("Sr. " + this.getNome());
     }
 
 }
