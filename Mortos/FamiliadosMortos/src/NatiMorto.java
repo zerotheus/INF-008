@@ -1,12 +1,11 @@
-public class NatiMorto extends Pessoa{
+public class NatiMorto extends Pessoa {
 
-    public NatiMorto(String nome, Pessoa antecessor, char sexo) {
+    public NatiMorto(String nome, Pessoa antecessor, char sexo) throws Exception {
         super(nome, antecessor, sexo);
-        //TODO Auto-generated constructor stub
     }
 
     @Override
-    protected boolean nasceNatimorto() throws Exception {
+    protected boolean seraNatimorto() throws Exception {
         throw new Exception("");
     }
 
@@ -14,5 +13,5 @@ public class NatiMorto extends Pessoa{
     public Pessoa cadastraFilho(char sexo, String nome) throws Exception {
         throw new UnsupportedOperationException("natimorto nao tem filhos");
     }
-    
+
 }

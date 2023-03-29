@@ -1,30 +1,50 @@
-public class Filho extends Pessoa{
+import java.util.Random;
 
-    public Filho(String nome, Pessoa antecessor) {
+public class Filho extends Pessoa {
+
+    public Filho(String nome, Pessoa antecessor) throws Exception {
         super(nome, antecessor, 'm');
-        //TODO Auto-generated constructor stub
     }
 
-    public Filho(String nome, String sobrenome){
-        super(nome, sobrenome);
+    public Filho(String nome, String sobrenome) throws Exception {
+        super();
     }
 
     @Override
-    protected boolean nasceNatimorto() throws Exception {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'nasceNatimorto'");
+    protected boolean seraNatimorto() throws Exception {
+        if ((this.getAntecessor().getSexo() == 'f' && (this.getSexo() == 'm') || (this.getSexo() == 'M'))
+                || (this.getAntecessor().getSexo() == 'F' && (this.getSexo() == 'm') || (this.getSexo() == 'M'))) {
+            Random numero = new Random();
+            if (numero.nextInt(2) == 1) {
+                return true;
+            }
+            return false;
+        }
+        if (this.getAntecessor().getSexo() == 'm' || this.getAntecessor().getSexo() == 'M') {
+            if (this.getAntecessor().getFilhos().size() == 2) {
+                return true;
+            }
+            return false;
+        }
+        return false;
     }
 
     @Override
     public Pessoa cadastraFilho(char sexo, String nome) throws Exception {
-        if(sexo == 'f'){
+        if (sexo == 'f' || sexo == 'F') {
             Pessoa filha = new Filha(nome, this);
+            if (filha.seraNatimorto()) {
+                filha = new NatiMorto(nome, this, sexo);
+            }
             return filha;
-        }else{
+        } else if (sexo == 'm' || sexo == 'M') {
             Pessoa filho = new Filho(nome, this);
+            if (filho.seraNatimorto()) {
+                filho = new NatiMorto(nome, this, sexo);
+            }
             return filho;
         }
         throw new Exception("Erro de digitação do sexo");
     }
-    
+
 }
