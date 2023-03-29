@@ -1,3 +1,4 @@
+import java.util.List;
 import java.util.Random;
 
 public class Filha extends Pessoa {
@@ -45,6 +46,16 @@ public class Filha extends Pessoa {
             return filho;
         }
         throw new Exception("Erro de digitação do sexo");
+    }
+
+    protected void listaFilhos() throws Exception {
+        if (this.getFilhos().isEmpty()) {
+            return;
+        }
+        final List<Pessoa> filhos = this.getFilhos();
+        for (int i = 0; i < filhos.size(); i++) {
+            System.out.println(filhos.get(i).getNome());
+        }
     }
 
     protected void adicionaPrefixo() {

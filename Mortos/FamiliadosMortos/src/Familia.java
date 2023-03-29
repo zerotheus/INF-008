@@ -26,6 +26,23 @@ public class Familia {
             // TODO: handle exception
         }
         fegalvao.listaAntecessores();
+        Pessoa random = null;
+        Pessoa viva = null;
+        Pessoa vivatambem = null;
+
+        try {
+            viva = fegalvao.cadastraFilho('f', "vivaTambem");
+            vivatambem = fegalvao.cadastraFilho('f', "viva");
+            random = fegalvao.cadastraFilho('m', "random");
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
+        try {
+            fegalvao.listaFilhos();
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
+
     }
 
 }

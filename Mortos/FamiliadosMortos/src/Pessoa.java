@@ -56,6 +56,8 @@ public abstract class Pessoa {
         }
     }
 
+    protected abstract void listaFilhos() throws Exception;
+
     protected abstract void adicionaPrefixo();
 
     protected abstract boolean seraNatimorto() throws Exception;

@@ -18,4 +18,9 @@ public class NatiMorto extends Pessoa {
         this.setNome("Natimorto " + this.getNome());
     }
 
+    @Override
+    protected void listaFilhos() throws Exception {
+        throw new UnsupportedOperationException("...");
+    }
+
 }

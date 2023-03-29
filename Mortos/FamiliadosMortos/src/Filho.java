@@ -1,3 +1,4 @@
+import java.util.List;
 import java.util.Random;
 
 public class Filho extends Pessoa {
@@ -54,6 +55,17 @@ public class Filho extends Pessoa {
     @Override
     protected void adicionaPrefixo() {
         this.setNome("Sr. " + this.getNome());
+    }
+
+    @Override
+    protected void listaFilhos() throws Exception {
+        if (this.getFilhos().isEmpty()) {
+            return;
+        }
+        final List<Pessoa> filhos = this.getFilhos();
+        for (int i = 0; i < filhos.size(); i++) {
+            System.out.println(filhos.get(i).getNome());
+        }
     }
 
 }
