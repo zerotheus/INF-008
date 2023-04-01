@@ -1,48 +1,30 @@
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class MusicStore {
-    private int openTime;
-    private int closeTime;
+    private int openHour;
+    private int closeHour;
     private String owner;
-    private Title[] titulos = new Title[4];
-
-    public Title[] getTitulos() {
-        return titulos;
-    }
-
-    public void setTitulos(String titulo, String artista, int pos) {
-        if (pos < 0 || pos > 4) {
-            return;
-        }
-        Title tituloTemporario = new Title();
-        tituloTemporario.setArtista(artista);
-        tituloTemporario.setTitulo(titulo);
-
-        titulos[pos] = tituloTemporario;
-
-    }
+    private List<Titulos> titulos;
 
     public MusicStore() {
-        setOwner("Sem dono");
-        setOpenTime(9);
-        setCloseTime(21);
-        // this.titulos = new Title();
+        this.openHour = 9;
+        this.closeHour = 21;
+        this.owner = "Sem dono";
+        titulos = new ArrayList<Titulos>();
     }
 
-    public int getOpenTime() {
-        return openTime;
+    public String displayHoursOfOperation() {
+        return "A loja abre as " + getOpenHour() + " e fecha as " + getCloseHour();
     }
 
-    public void setOpenTime(int openTime) {
-        this.openTime = openTime;
+    public int getOpenHour() {
+        return openHour;
     }
 
-    public int getCloseTime() {
-        return closeTime;
-    }
-
-    public void setCloseTime(int closeTime) {
-        this.closeTime = closeTime;
+    public int getCloseHour() {
+        return closeHour;
     }
 
     public String getOwner() {
@@ -53,42 +35,45 @@ public class MusicStore {
         this.owner = owner;
     }
 
-    private int getHour() {
-        Calendar calendario = Calendar.getInstance(); // classe que tem o metodo de retorno da sua regiao do planeta;
-        return calendario.get(Calendar.HOUR_OF_DAY); // retorna um inteiro com a hora do dia
+    private int getHourOfDay() {
+        Calendar calendar = Calendar.getInstance();
+        return calendar.HOUR_OF_DAY;
     }
 
-    private boolean isOpen() {
-        int hora = getHour();
-        if (hora > 8 && hora < 22) {
+    private boolean estaAberta() {
+        int hora = getHourOfDay();
+        if (hora > getOpenHour() && hora < getCloseHour()) {
             return true;
         }
         return false;
     }
 
-    public String getOpenCloseMessage() {
-        if (isOpen()) {
-            return "A loja esta aberta";
+    public String estaAbertaString() {
+        if (estaAberta()) {
+            return "Esta aberta";
+        } else {
+            return "Esta fechada";
         }
-        return "A loja esta fechada";
     }
 
-    public String displayMusictitles() {
-        System.out.println("titulos disponiveis\n");
-        String retorno = "";
-        for (int i = 0; i < 4; i++) {
-            retorno = retorno + titulos[i].toString();
+    public List<Titulos> getTitulos() {
+        return titulos;
+    }
+
+    public void listaTitulos() {
+        for (int i = 0; i < titulos.size(); i++) {
+            System.out.println(
+                    "Artista: " + this.titulos.get(i).getArtista() + "Musica" + this.titulos.get(i).getTitulo() + "\n");
         }
-        return retorno;
     }
 
-    public void displayHourofOperation() {
-        System.out.println("Diaramente das " + openTime + ":00 as " + closeTime + ":00");
+    public void setTitulos(String artista, String titulo) {
+        Titulos novoTitulo = new Titulos(artista, titulo);
+        titulos.add(novoTitulo);
     }
 
-    @Override
     public String toString() {
-        return "MusicStore abre as " + openTime + ", fecha as " + closeTime + ", dono " + owner + ".";
+        return "Dono: " + getOwner() + ", abre:" + getOpenHour() + ", fecha: " + getCloseHour();
     }
 
 }
