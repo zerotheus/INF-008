@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public class Filha extends Pessoa {
 
     public Filha(String nome, Pessoa antecessor) {
@@ -5,27 +7,46 @@ public class Filha extends Pessoa {
     }
 
     @Override
-    public Pessoa instanceJoao() throws Exception {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'instanceJoao'");
+    public Pessoa cadastraFilho(String nome, char sexo) {
+        Pessoa filho = adicionaFilho(nome, this, sexo);
+        if (filho == null) {
+            System.out.println("Error na digitacao do sexo");
+            // throw new Exception("Por favor digitar o sexo corretamente");
+            return null;
+        }
+        this.getDescendentes().add(filho);
+        return filho;
     }
 
     @Override
-    public void cadastraFilho(String nome, char sexo) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'cadastraFilho'");
-    }
-
-    @Override
-    public Pessoa adicionaFilho(String nome, Pessoa antecessor, char sexo) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'adicionaFilho'");
+    protected Pessoa adicionaFilho(String nome, Pessoa antecessor, char sexo) {
+        if (seraNatimorto(sexo, antecessor)) {
+            Pessoa filho = new Natimorto(nome, antecessor);
+            return filho;
+        }
+        if (sexo == 'm' || sexo == 'M') {
+            Pessoa filho = new Filho(nome, antecessor);
+            return filho;
+        }
+        if (sexo == 'f' || sexo == 'F') {
+            Pessoa filha = new Filha(nome, antecessor);
+            return filha;
+        }
+        return null;
     }
 
     @Override
     protected boolean seraNatimorto(char sexo, Pessoa antecessor) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'seraNatimorto'");
+        if ((sexo == 'm' || sexo == 'M')) {
+            Random random = new Random();
+            if (random.nextInt(2) == 1) {
+                return true;
+            }
+            if (sexo == 'f' || sexo == 'F') {
+                return false;
+            }
+        }
+        return false;
     }
 
 }

@@ -5,19 +5,12 @@ public class Natimorto extends Pessoa {
     }
 
     @Override
-    public Pessoa instanceJoao() throws Exception {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'instanceJoao'");
+    public Pessoa cadastraFilho(String nome, char sexo) {
+        throw new UnsupportedOperationException("Natimorto n gera filhos");
     }
 
     @Override
-    public void cadastraFilho(String nome, char sexo) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'cadastraFilho'");
-    }
-
-    @Override
-    public Pessoa adicionaFilho(String nome, Pessoa antecessor, char sexo) {
+    protected Pessoa adicionaFilho(String nome, Pessoa antecessor, char sexo) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'adicionaFilho'");
     }
