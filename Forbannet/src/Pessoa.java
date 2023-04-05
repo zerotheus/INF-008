@@ -20,7 +20,13 @@ public abstract class Pessoa {
         descendentes = new ArrayList<Pessoa>();
     }
 
-    public abstract Pessoa instanceJoao() throws Exception;
+    public static Pessoa instanceJoao() throws Exception {
+        if (Pessoa.getSobrenome() != null) {
+            throw new Exception("Joao ja instanciado");
+        }
+        Filho joao = new Filho();
+        return joao;
+    }
 
     public String getNome() {
         return nome;
@@ -46,10 +52,18 @@ public abstract class Pessoa {
         return descendentes;
     }
 
-    public abstract void cadastraFilho(String nome, char sexo);
+    public void listAtecessores() {
+        Pessoa antecessor = getAntecessor();
+        if (antecessor != null) {
+            System.out.println(antecessor.getNome());
+            antecessor.listAtecessores();
+        }
+    }
 
-    public abstract Pessoa adicionaFilho(String nome, Pessoa antecessor, char sexo);
+    public abstract Pessoa cadastraFilho(String nome, char sexo) throws Exception;
 
-    protected abstract boolean seraNatimorto(char sexo, Pessoa antecessor);
+    protected abstract Pessoa adicionaFilho(String nome, Pessoa antecessor, char sexo) throws Exception;
+
+    protected abstract boolean seraNatimorto(char sexo, Pessoa antecessor) throws Exception;
 
 }

@@ -1,5 +1,3 @@
-import java.util.Random;
-
 public class Filho extends Pessoa {
 
     Filho() {
@@ -12,25 +10,19 @@ public class Filho extends Pessoa {
     }
 
     @Override
-    public Pessoa instanceJoao() throws Exception {
-        if (Pessoa.getSobrenome() != null) {
-            throw new Exception("Joao ja instanciado");
-        }
-        Filho joao = new Filho();
-        return joao;
-    }
-
-    @Override
-    public void cadastraFilho(String nome, char sexo) {
+    public Pessoa cadastraFilho(String nome, char sexo) /* throws Exception */ {
         Pessoa filho = adicionaFilho(nome, this, sexo);
         if (filho == null) {
             System.out.println("Error na digitacao do sexo");
+            // throw new Exception("Por favor digitar o sexo corretamente");
+            return null;
         }
         this.getDescendentes().add(filho);
+        return filho;
     }
 
     @Override
-    public Pessoa adicionaFilho(String nome, Pessoa antecessor, char sexo) {
+    protected Pessoa adicionaFilho(String nome, Pessoa antecessor, char sexo) {
         if (seraNatimorto(sexo, antecessor)) {
             Pessoa filho = new Natimorto(nome, antecessor);
             return filho;
@@ -48,14 +40,7 @@ public class Filho extends Pessoa {
 
     @Override
     protected boolean seraNatimorto(char sexo, Pessoa antecessor) {
-        if (antecessor instanceof Filha && (sexo == 'm' || sexo == 'M')) {
-            Random random = new Random();
-            if (random.nextInt(2) == 1) {
-                return true;
-            }
-            return false;
-        }
-        if (antecessor instanceof Filho && antecessor.getDescendentes().size() == 1) {
+        if (antecessor.getDescendentes().size() == 1) {
             return true;
         }
         return false;
