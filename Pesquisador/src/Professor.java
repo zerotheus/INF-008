@@ -1,16 +1,12 @@
 public class Professor extends Pesquisador {
 
-    public Professor(String nome, Coordenador coordenador) {
+    protected Professor(String nome, Coordenador coordenador) {
         super(nome, coordenador);
+        coordenador.inserirPesquisador(this);
     }
 
     @Override
-    public Pesquisador pegaMara() throws Exception {
-        throw new Exception("Esta classe nao pode instanciar Mara");
-    }
-
-    @Override
-    public void inserirPesquisador(Pesquisador pesquisador) {
+    protected void inserirPesquisador(Pesquisador pesquisador) {
         System.out.println("Professores nao inserem pesquisadores");
         return;
     }
@@ -19,7 +15,17 @@ public class Professor extends Pesquisador {
     public double getValorPago() {
         double valor;
         valor = 220 + (0.3 * this.getCoordenador().getValorPago());
-        return 0;
+        return valor;
+    }
+
+    @Override
+    public void listaTodosPesquisadores() {
+        return;
+    }
+
+    @Override
+    protected Pesquisador cadastraPesquisador(String nome, int tipo) throws Exception {
+        throw new Exception("professor nao insere pesquisador");
     }
 
 }

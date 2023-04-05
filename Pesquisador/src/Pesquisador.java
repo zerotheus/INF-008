@@ -5,21 +5,27 @@ public abstract class Pesquisador {
     private String nome;
     private Coordenador coordenador;
     protected List<Pesquisador> pesquisadores;
-    private static boolean isMaraIstanciate;
+    private static boolean isMaraIstanciate = false;
 
     protected Pesquisador() {
         this.setNome("Mara Andrade");
         this.coordenador = null;
         pesquisadores = new ArrayList<Pesquisador>();
+        isMaraIstanciate = true;
     }
 
-    public Pesquisador(String nome, Coordenador coordenador) {
+    protected Pesquisador(String nome, Coordenador coordenador) {
         this.setNome(nome);
         this.coordenador = coordenador;
         pesquisadores = new ArrayList<Pesquisador>();
     }
 
-    public abstract Pesquisador pegaMara() throws Exception;
+    public static Pesquisador pegaMara() throws Exception {
+        if (!isMaraIstanciate) {
+            return Coordenador.pegaMaraCordenadora();
+        }
+        throw new Exception("mara ja instanciada");
+    }
 
     public String getNome() {
         return nome;
@@ -53,7 +59,11 @@ public abstract class Pesquisador {
         return quantidade;
     }
 
-    public abstract void inserirPesquisador(Pesquisador pesquisador);
+    protected abstract Pesquisador cadastraPesquisador(String nome, int tipo) throws Exception;
+
+    public abstract void listaTodosPesquisadores();
+
+    protected abstract void inserirPesquisador(Pesquisador pesquisador);
 
     public abstract double getValorPago();
 

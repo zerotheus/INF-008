@@ -1,15 +1,15 @@
 public class Coordenador extends Pesquisador {
 
-    public Coordenador(String nome, Coordenador coordenador) {
+    protected Coordenador(String nome, Coordenador coordenador) {
         super(nome, coordenador);
+        coordenador.inserirPesquisador(this);
     }
 
     private Coordenador() {
         super();
     }
 
-    @Override
-    public Pesquisador pegaMara() throws Exception {
+    public static Pesquisador pegaMaraCordenadora() throws Exception {
         if (Pesquisador.isMaraIstanciate()) {
             throw new Exception("So pode ter uma mara");
         }
@@ -18,7 +18,7 @@ public class Coordenador extends Pesquisador {
     }
 
     @Override
-    public void inserirPesquisador(Pesquisador pesquisador) {
+    protected void inserirPesquisador(Pesquisador pesquisador) {
         pesquisadores.add(pesquisador);
     }
 
@@ -30,6 +30,26 @@ public class Coordenador extends Pesquisador {
             return 0;
         }
         return valor;
+    }
+
+    @Override
+    public void listaTodosPesquisadores() {
+        for (int i = 0; i < pesquisadores.size(); i++) {
+            pesquisadores.get(i).listaTodosPesquisadores();
+            System.out.println(pesquisadores.get(i).getNome());
+        }
+        return;
+    }
+
+    @Override
+    protected Pesquisador cadastraPesquisador(String nome, int tipo) {
+        Pesquisador pesquisador;
+        if (tipo == 1) {
+            pesquisador = new Coordenador(nome, this);
+        } else {
+            pesquisador = new Professor(nome, this);
+        }
+        return pesquisador;
     }
 
 }
