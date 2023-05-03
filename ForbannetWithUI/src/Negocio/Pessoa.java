@@ -63,12 +63,16 @@ public abstract class Pessoa {
         return TodososDescentedentes;
     }
 
-    public void listAtecessores() {
+    public String listAtecessores() {
         Pessoa antecessor = getAntecessor();
+        String nomeAntecessor = "";
         if (antecessor != null) {
+            nomeAntecessor = antecessor.getNome();
+            nomeAntecessor += "\n";
             System.out.println(antecessor.getNome());
-            antecessor.listAtecessores();
+            nomeAntecessor += antecessor.listAtecessores();
         }
+        return nomeAntecessor;
     }
 
     public Pessoa procuraPesoa(String nome) {
