@@ -11,6 +11,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
+
 import Negocio.Filho;
 import Negocio.Pessoa;
 
@@ -25,7 +27,7 @@ public class ForbannetUI {
             System.out.println(e.toString());
         }
 
-        JLabel familiaresLabel = new JLabel("Familiares: ");
+        JLabel familiaresLabel = new JLabel("Familiares:");
         familiaresLabel.setForeground(Color.decode("#FF00C6"));
         familiaresLabel.setBounds(20, 30, 70, 25);
 
@@ -40,7 +42,7 @@ public class ForbannetUI {
         JTextArea TextodoNomedoNovoFilho = new JTextArea(1, 45);
         TextodoNomedoNovoFilho.setBounds(420, 33, 155, 20);
 
-        JLabel sexoLabel = new JLabel("Sexo: ");
+        JLabel sexoLabel = new JLabel("Sexo:");
         sexoLabel.setBounds(50, 140, 35, 25);
         sexoLabel.setForeground(Color.decode("#FF00C6"));
 
@@ -55,6 +57,10 @@ public class ForbannetUI {
         ButtonGroup seletorDoSexoButtonGroup = new ButtonGroup();
         seletorDoSexoButtonGroup.add(seletorFemininoJRadioButton);
         seletorDoSexoButtonGroup.add(seletorMasculinoJRadioButton);
+
+        JTextField TextodosAntecessores = new JTextField();
+        TextodosAntecessores.setBounds(100, 315, 395, 75);
+        TextodosAntecessores.setEditable(false);
 
         JButton adicionaFilhoJButton = new JButton("Adicionar Filho");
         adicionaFilhoJButton.setBounds(235, 275, 120, 25);
@@ -110,7 +116,22 @@ public class ForbannetUI {
                 }
                 familiaresJComboBox.addItem(filho.getNome());
                 return;
+            }
+        });
 
+        familiaresJComboBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (e.getSource() != familiaresJComboBox) {
+                    return;
+                }
+                if (familiaresJComboBox.getSelectedItem().equals(joao)) {
+                    TextodosAntecessores.setText("");
+                    return;
+                }
+                Pessoa pessoaSelecionada = joao.procuraPesoa((String) familiaresJComboBox.getSelectedItem());
+                String antecessoresNomes = pessoaSelecionada.listAtecessores();
+                TextodosAntecessores.setText(antecessoresNomes);
             }
         });
 
@@ -127,5 +148,6 @@ public class ForbannetUI {
         forbannetsFrame.add(TextodoNomedoNovoFilho);
         forbannetsFrame.add(adicionaFilhoJButton);
         forbannetsFrame.add(familiaresJComboBox);
+        forbannetsFrame.add(TextodosAntecessores);
     }
 }
