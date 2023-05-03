@@ -26,7 +26,7 @@ public class Professor extends Pesquisador {
     }
 
     @Override
-    protected Pesquisador cadastraPesquisador(String nome, int tipo) throws Exception {
+    public Pesquisador cadastraPesquisador(String nome, int tipo) throws Exception {
         throw new Exception("professor nao insere pesquisador");
     }
 

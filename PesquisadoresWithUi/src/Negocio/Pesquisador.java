@@ -33,6 +33,22 @@ public abstract class Pesquisador {
         return nome;
     }
 
+    public Pesquisador procuraPesquisador(String nome) {
+        System.out.println(nome);
+        Pesquisador pesquisador = null;
+        if (this.getNome().equalsIgnoreCase(nome)) {
+            return this;
+        }
+        for (int i = 0; i < this.pesquisadores.size(); i++) {
+            if (this.pesquisadores.get(i).getNome().equalsIgnoreCase(nome)) {
+                pesquisador = this.pesquisadores.get(i);
+                return pesquisador;
+            }
+            pesquisador = this.pesquisadores.get(i).procuraPesquisador(nome);
+        }
+        return pesquisador;
+    }
+
     public void setNome(String nome) {
         this.nome = nome;
     }
@@ -61,7 +77,7 @@ public abstract class Pesquisador {
         return quantidade;
     }
 
-    protected abstract Pesquisador cadastraPesquisador(String nome, int tipo) throws Exception;
+    public abstract Pesquisador cadastraPesquisador(String nome, int tipo) throws Exception;
 
     public abstract void listaTodosPesquisadores();
 

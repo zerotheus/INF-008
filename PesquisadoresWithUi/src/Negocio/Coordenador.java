@@ -44,13 +44,13 @@ public class Coordenador extends Pesquisador {
     }
 
     @Override
-    protected Pesquisador cadastraPesquisador(String nome, int tipo) {
+    public Pesquisador cadastraPesquisador(String nome, int tipo) {
         Pesquisador pesquisador;
         if (tipo == 1) {
             pesquisador = new Coordenador(nome, this);
-        } else {
-            pesquisador = new Professor(nome, this);
+            return pesquisador;
         }
+        pesquisador = new Professor(nome, this);
         return pesquisador;
     }
 
