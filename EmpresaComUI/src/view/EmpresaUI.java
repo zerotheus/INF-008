@@ -8,6 +8,8 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import Negocio.Chefe;
 import Negocio.Pessoa;
@@ -28,8 +30,8 @@ public class EmpresaUI {
         myFrame = new JFrame("Empresa");
         myFrame.setBounds(0, 0, 450, 500);
 
-        final JLabel NomeDoEmpregadoCadastradoLabel = new JLabel("Nome do Empregado:");
-        NomeDoEmpregadoCadastradoLabel.setBounds(20, 30, 130, 25);
+        final JLabel nomeDoEmpregadoCadastradoLabel = new JLabel("Nome do Empregado:");
+        nomeDoEmpregadoCadastradoLabel.setBounds(20, 30, 130, 25);
 
         JTextField nomeDoNovoEmpregadoTextField = new JTextField(60);
         nomeDoNovoEmpregadoTextField.setBounds(180, 30, 150, 23);
@@ -71,10 +73,63 @@ public class EmpresaUI {
         JTextArea listagemdeSuperioresTextField = new JTextArea(5, 30);
         listagemdeSuperioresTextField.setBounds(20, 140, 390, 90);
 
+        final JButton consultaButton = new JButton("Consulta");
+        consultaButton.setBounds(160, 240, 100, 25);
+
+        // Actions
+        cadastrarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (e.getSource() != cadastrarButton) {
+                    return;
+                }
+                final String nomedoSuperior = (String) comboBoxdosSuperiores.getSelectedItem();
+                final String nomedoEmpregado = nomeDoNovoEmpregadoTextField.getText();
+                final Pessoa superior = flavia.procuraEmpregado(nomedoSuperior);
+                Pessoa novoEmpregado = null;
+                if (comboBoxdoTipo.getSelectedIndex() == 0) {
+                    try {
+                        novoEmpregado = superior.adicionaEmpregado(nomedoEmpregado);
+                    } catch (Exception e1) {
+                        System.out.println(e.toString());
+                        return;
+                    }
+                    nomesdeTodososFuncionariosComboBox.addItem(novoEmpregado.getNome());
+                    return;
+                }
+                try {
+                    novoEmpregado = superior.adicionaEmpregadoChefe(nomedoEmpregado);
+                    nomesdeTodososFuncionariosComboBox.addItem(novoEmpregado.getNome());
+                    comboBoxdosSuperiores.addItem(novoEmpregado.getNome());
+                } catch (Exception e2) {
+                    System.out.println(e.toString());
+                }
+            }
+        });
+
+        consultaButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (e.getSource() != consultaButton) {
+                    return;
+                }
+                final String nomedoConsultado = (String) nomesdeTodososFuncionariosComboBox.getSelectedItem();
+                final Pessoa consultado = flavia.procuraEmpregado(nomedoConsultado);
+
+                if (comboBoxdoTipodeConsulta.getSelectedIndex() == 0) {
+                    final String nomesSubordinados = consultado.ListaEmpregados();
+                    listagemdeSuperioresTextField.setText(nomesSubordinados);
+                    return;
+                }
+                final String nomesdosSuperiores = consultado.listaSuperiores();
+                listagemdeSuperioresTextField.setText(nomesdosSuperiores);
+            }
+        });
+
         JTabbedPane tabbedPane = new JTabbedPane();
 
         JPanel cadastrodeEmpregadosPanel = new JPanel(null);
-        cadastrodeEmpregadosPanel.add(NomeDoEmpregadoCadastradoLabel);
+        cadastrodeEmpregadosPanel.add(nomeDoEmpregadoCadastradoLabel);
         cadastrodeEmpregadosPanel.add(selecaoDoSuperiorLabel);
         cadastrodeEmpregadosPanel.add(selecaoDoTipoLabel);
         cadastrodeEmpregadosPanel.add(comboBoxdoTipo);
@@ -89,6 +144,7 @@ public class EmpresaUI {
         consultadeEmpregadosPanel.add(nomesdeTodososFuncionariosComboBox);
         consultadeEmpregadosPanel.add(comboBoxdoTipodeConsulta);
         consultadeEmpregadosPanel.add(listagemdeSuperioresTextField);
+        consultadeEmpregadosPanel.add(consultaButton);
 
         tabbedPane.add("Cadastro", cadastrodeEmpregadosPanel);
         tabbedPane.add("Consulta", consultadeEmpregadosPanel);
