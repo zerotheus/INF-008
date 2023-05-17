@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Cinema {
-    private final int horariodeAbertura;
-    private final int horariodeFechamento;
+    private static int horariodeAbertura;
+    private static int horariodeFechamento;
     private List<Sala> salas = new ArrayList<Sala>();
 
     Cinema() {
@@ -25,6 +25,18 @@ public class Cinema {
                 continue;
             }
         }
+    }
+
+    public static int getHorariodeAbertura() {
+        return horariodeAbertura;
+    }
+
+    public static int getHorariodeFechamento() {
+        return horariodeFechamento;
+    }
+
+    public List<Sala> getSalas() {
+        return salas;
     }
 
 }
