@@ -23,6 +23,8 @@ public abstract class Sala {
         return sessoes;
     }
 
+    public abstract String TipodaSala();
+
     public abstract int getQuantidadeDecadeirasDisponiveis();
 
 }
