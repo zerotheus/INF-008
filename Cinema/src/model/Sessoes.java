@@ -5,15 +5,16 @@ public class Sessoes {
     private int precoDevenda;
     private int quantidadedeCadeiras;
     private int quantidadeDeIngressosTotalDisponiveisaVenda;
+    private int totaldeIngressosVendidos;
     private int horario;
-    private Sala sala;
+    private String tipodeSala;
 
-    public Sessoes(int horario, Sala sala) {
+    public Sessoes(int horario, String tipodeSala, int quantidadeDecadeiras) {
         setHorario(horario);
-        setTipodaSala(sala);
-        setQuantidadedeCadeiras();
+        setTipodaSala(tipodeSala);
+        setQuantidadedeCadeiras(quantidadeDecadeiras);
         setQuantidadeDeIngressosTotalDisponiveisaVenda();
-        definevalordoIngresso(horario, sala);
+        definevalordoIngresso(horario);
     }
 
     public int getHorario() {
@@ -24,20 +25,20 @@ public class Sessoes {
         this.horario = horario;
     }
 
-    public Sala getTipodaSala() {
-        return sala;
+    public String getTipodaSala() {
+        return tipodeSala;
     }
 
-    private void setTipodaSala(Sala sala) {
-        this.sala = sala;
+    private void setTipodaSala(String tipodeSala) {
+        this.tipodeSala = tipodeSala;
     }
 
     public int getQuantidadedeCadeiras() {
         return quantidadedeCadeiras;
     }
 
-    public void setQuantidadedeCadeiras() {
-        this.quantidadedeCadeiras = sala.getQuantidadedeCadeiras();
+    public void setQuantidadedeCadeiras(int quantidadeDecadeiras) {
+        this.quantidadedeCadeiras = quantidadeDecadeiras;
     }
 
     public int getQuantidadeDeIngressosTotalDisponiveisaVenda() {
@@ -45,24 +46,29 @@ public class Sessoes {
     }
 
     public void setQuantidadeDeIngressosTotalDisponiveisaVenda() {
-        this.quantidadeDeIngressosTotalDisponiveisaVenda = sala.getQuantidadeDecadeirasDisponiveis();
+        if (!this.tipodeSala.equalsIgnoreCase("Sala Grande")) {
+            this.quantidadeDeIngressosTotalDisponiveisaVenda = quantidadedeCadeiras;
+            return;
+        }
+        this.quantidadeDeIngressosTotalDisponiveisaVenda = (quantidadedeCadeiras * 9) / 10;
+        return;
     }
 
     public void vendeIngresso(int quantidadedeIngressosVendidos) {
-        this.quantidadeDeIngressosTotalDisponiveisaVenda -= quantidadedeIngressosVendidos;
+        this.totaldeIngressosVendidos += quantidadedeIngressosVendidos;
     }
 
-    private void definevalordoIngresso(int horario, Sala sala) {
+    private void definevalordoIngresso(int horario) {
 
-        if (sala instanceof SalaPequena) {
+        if (this.tipodeSala.equalsIgnoreCase("Sala Pequena")) {
             precoDevenda = 9;
             return;
         }
-        if (sala instanceof SalaGrande) {
+        if (this.tipodeSala.equalsIgnoreCase("Sala Grande")) {
             precoDevenda = 12;
             return;
         }
-        // se for sala media
+        // se for tipo de Sala for media
         if (horario < 18) {
             precoDevenda = 9;
             return;
@@ -70,6 +76,10 @@ public class Sessoes {
         precoDevenda = 12;
         return;
 
+    }
+
+    public int totalFaturado() {
+        return totaldeIngressosVendidos * precoDevenda;
     }
 
 }
