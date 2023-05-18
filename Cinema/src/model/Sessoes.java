@@ -58,6 +58,10 @@ public class Sessoes {
         this.totaldeIngressosVendidos += quantidadedeIngressosVendidos;
     }
 
+    public int getTotaldeIngressosVendidos() {
+        return totaldeIngressosVendidos;
+    }
+
     private void definevalordoIngresso(int horario) {
 
         if (this.tipodeSala.equalsIgnoreCase("Sala Pequena")) {
