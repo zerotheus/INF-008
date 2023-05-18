@@ -39,4 +39,18 @@ public class Cinema {
         return salas;
     }
 
+    public Integer[] getSalasIds() {
+        ArrayList<Integer> salasids = new ArrayList<Integer>();
+        for (int i = 0; i < salas.size(); i++) {
+            salasids.add(i + 1);
+        }
+        Integer[] retorno = new Integer[salas.size()];
+        retorno = salasids.toArray(retorno);
+        return retorno;
+    }
+
+    public int getquantidadedeSalas() {
+        return salas.size();
+    }
+
 }
