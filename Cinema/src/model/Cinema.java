@@ -8,7 +8,7 @@ public class Cinema {
     private static int horariodeFechamento;
     private List<Sala> salas = new ArrayList<Sala>();
 
-    Cinema() {
+    public Cinema() {
         horariodeAbertura = 13;
         horariodeFechamento = 22;
         for (int i = 0; i < 12; i++) {
