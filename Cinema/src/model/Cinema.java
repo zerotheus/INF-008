@@ -49,6 +49,14 @@ public class Cinema {
         return retorno;
     }
 
+    public int totalFaturado() {
+        int totalFaturado = 0;
+        for (int i = 0; i < salas.size(); i++) {
+            totalFaturado += salas.get(i).totalFaturado();
+        }
+        return totalFaturado;
+    }
+
     public int getquantidadedeSalas() {
         return salas.size();
     }
