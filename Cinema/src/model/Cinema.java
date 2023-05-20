@@ -44,8 +44,8 @@ public class Cinema {
         for (int i = 0; i < salas.size(); i++) {
             salasids.add(i + 1);
         }
-        Integer[] retorno = new Integer[salas.size()];
-        retorno = salasids.toArray(retorno);
+        Integer[] retorno;
+        retorno = salasids.stream().toArray(Integer[]::new);
         return retorno;
     }
 

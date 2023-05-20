@@ -23,6 +23,22 @@ public abstract class Sala {
         return sessoes;
     }
 
+    public int totaldeIngressosVendidos() {
+        int totaldeIngressosVendidos = 0;
+        for (int i = 0; i < sessoes.size(); i++) {
+            totaldeIngressosVendidos += sessoes.get(i).getTotaldeIngressosVendidos();
+        }
+        return totaldeIngressosVendidos;
+    }
+
+    public int totalFaturado() {
+        int faturamento = 0;
+        for (int i = 0; i < sessoes.size(); i++) {
+            faturamento += sessoes.get(i).totalFaturado();
+        }
+        return faturamento;
+    }
+
     public abstract String TipodaSala();
 
     public abstract int getQuantidadeDecadeirasDisponiveis();
